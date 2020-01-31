@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Agenda</title>
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+    <h1>Agenda de Contatos</h1>
+    <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th></th>
+        </tr>
+        <tr th:each="contato : ${allContatos}">
+            <td th:text="${contato.id}"> </td>
+            <td th:text="${contato.nome}"> </td>
+            <td th:text="${contato.telefone}"> </td>
+
+            <td>
+                <a th:href="@{/contatos/__${contato.id}__/delete}" onClick="return confirm('Delete?')">Delete</a>
+                <a th:href="@{/update-contato/__${contato.id}__}">Update</a>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <a href="#" th:href="@{/novo-contato}">Novo Contato</a> | <a href="#" th:href="@{/contatos}">All Contatos</a>
+
+    <form th:action="@{/search}" method="get">
+        <input type="text" name="nome" /> <button type="submit">Search</button>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th></th>
+            </tr>
+            <tr th:each="contato : ${search}">
+                <td th:text="${contato.id}"> </td>
+                <td th:text="${contato.nome}"> </td>
+                <td th:text="${contato.telefone}"> </td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+
+</html>

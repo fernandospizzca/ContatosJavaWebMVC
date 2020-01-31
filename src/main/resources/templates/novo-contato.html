@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Agenda</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<h1>Adicionar Contato</h1>
+
+<form th:action="@{/novo-contato}" th:object="${contato}" method="post">
+    <input type="text" name="nome"     th:field="*{nome}"     th:placeholder="Nome"/> <br/>
+    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Name Error</span>
+    <br/>
+
+    <input type="text" name="telefone" th:field="*{telefone}" th:placeholder="Telefone"/> <br/>
+    <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}">Telefone Error</span>
+    <br/>
+    <button type="submit">Adicionar Novo Contato</button>
+</form>
+
+<br>
+
+<a th:href="@{/contatos}">Contatos</a>
+
+</body>
+
+</html>
